@@ -37,6 +37,12 @@ body {
 }
 
 /* Todo form styles */
+.todo-form {
+   display: flex;
+   flex-flow: row nowrap;
+   align-items: center;
+}
+
 .todo-form input,
 .todo-item {
    border: 1px solid #ececec;
@@ -44,7 +50,7 @@ body {
 
 .todo-form input {
    padding: 0 14px;
-   width: 100%;
+   width: 80%;
    height: 48px;
    transition: .25s border ease-in-out;
 }
@@ -119,7 +125,7 @@ body {
    border: 1px solid #1abc9c;
 }
 
-.item-remove {
+/* .item-remove {
    display: flex;
    padding-left: 8px;
    padding-right: 8px;
@@ -132,4 +138,4 @@ body {
 
 .item-remove:hover {
    color: #111;
-}
+} */

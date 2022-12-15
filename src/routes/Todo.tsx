@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 // Import components
 import TodoForm from "../components/TodoForm";
@@ -6,6 +6,10 @@ import TodoList from "../components/TodoList";
 
 // Import interfaces
 import { TodoInterface } from "../modules/interfaces";
+import { todoCreateService } from "./../service/todoService";
+import { todoGetService } from "../service/todoService";
+import { todoUpdateService } from "../service/todoService";
+import { todoDelService } from "../service/todoService";
 
 // Import styles
 import "./../styles/Todo.css";
@@ -14,8 +18,20 @@ import "./../styles/Todo.css";
 const Todo = () => {
    const [todos, setTodos] = React.useState<TodoInterface[]>([]);
 
+   useEffect(() => {
+      updateTodos();
+   }, []);
+
+   const updateTodos = async () => {
+      const newTodosState: TodoInterface[] = await todoGetService();
+      setTodos(newTodosState);
+   };
+
    // Creating new todo item
    function handleTodoCreate(todo: TodoInterface) {
+      // todo create axios
+      todoCreateService(todo);
+
       // Prepare new todos state
       const newTodosState: TodoInterface[] = [...todos];
 
@@ -27,16 +43,19 @@ const Todo = () => {
    }
 
    // Update existing todo item
-   function handleTodoUpdate(
-      event: React.ChangeEvent<HTMLInputElement>,
-      id: string
-   ) {
+   async function handleTodoUpdate(id: string, text: string) {
       // Prepare new todos state
       const newTodosState: TodoInterface[] = [...todos];
 
       // Find correct todo item to update
-      newTodosState.find((todo: TodoInterface) => todo.id === id)!.text =
-         event.target.value;
+      newTodosState.find((todo: TodoInterface) => todo.id === id)!.todo = text;
+
+      const res = newTodosState.find((todo: TodoInterface) => todo.id === id);
+      if (res) {
+         // todo update axios
+         const updateTodo = res;
+         todoUpdateService(updateTodo);
+      }
 
       // Update todos state
       setTodos(newTodosState);
@@ -44,6 +63,9 @@ const Todo = () => {
 
    // Remove existing todo item
    function handleTodoRemove(id: string) {
+      // todo del remove
+      todoDelService(id);
+
       // Prepare new todos state
       const newTodosState: TodoInterface[] = todos.filter(
          (todo: TodoInterface) => todo.id !== id
@@ -62,6 +84,13 @@ const Todo = () => {
       newTodosState.find((todo: TodoInterface) => todo.id === id)!.isCompleted =
          !newTodosState.find((todo: TodoInterface) => todo.id === id)!
             .isCompleted;
+
+      const res = newTodosState.find((todo: TodoInterface) => todo.id === id);
+      if (res) {
+         // todo update axios
+         const updateTodo = res;
+         todoUpdateService(updateTodo);
+      }
 
       // Update todos state
       setTodos(newTodosState);

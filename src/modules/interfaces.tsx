@@ -1,8 +1,9 @@
 // Todo interface
 export interface TodoInterface {
    id: string;
-   text: string;
+   todo: string;
    isCompleted: boolean;
+   userId: string;
 }
 
 // Todo form interface
@@ -13,10 +14,7 @@ export interface TodoFormInterface {
 
 // Todo list interface
 export interface TodoListInterface {
-   handleTodoUpdate: (
-      event: React.ChangeEvent<HTMLInputElement>,
-      id: string
-   ) => void;
+   handleTodoUpdate: (id: string, text: string) => void;
    handleTodoRemove: (id: string) => void;
    handleTodoComplete: (id: string) => void;
    handleTodoBlur: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -25,10 +23,7 @@ export interface TodoListInterface {
 
 // Todo item interface
 export interface TodoItemInterface {
-   handleTodoUpdate: (
-      event: React.ChangeEvent<HTMLInputElement>,
-      id: string
-   ) => void;
+   handleTodoUpdate: (id: string, text: string) => void;
    handleTodoRemove: (id: string) => void;
    handleTodoComplete: (id: string) => void;
    handleTodoBlur: (event: React.ChangeEvent<HTMLInputElement>) => void;

@@ -18,26 +18,20 @@ const TodoForm = (props: TodoFormInterface) => {
       setFormState(event.target.value);
    }
 
-   // Handle 'Enter' in todo input
-   function handleInputEnter(event: React.KeyboardEvent) {
-      // Check for 'Enter' key
-      if (event.key === "Enter") {
-         // Prepare new todo object
-         const newTodo: TodoInterface = {
-            id: shortid.generate(),
-            text: formState,
-            isCompleted: false,
-         };
+   const bnClickTodoCreate = async () => {
+      const newTodo: TodoInterface = {
+         id: shortid.generate(),
+         todo: formState,
+         isCompleted: false,
+         userId: "",
+      };
 
-         // Create new todo item
+      try {
          props.handleTodoCreate(newTodo);
-
-         // Reset the input field
-         if (inputRef && inputRef.current) {
-            inputRef.current.value = "";
-         }
+      } catch {
+         console.log("error");
       }
-   }
+   };
 
    return (
       <div className="todo-form">
@@ -46,8 +40,8 @@ const TodoForm = (props: TodoFormInterface) => {
             type="text"
             placeholder="Enter new todo"
             onChange={(event) => handleInputChange(event)}
-            onKeyPress={(event) => handleInputEnter(event)}
          />
+         <button onClick={bnClickTodoCreate}>추가</button>
       </div>
    );
 };
