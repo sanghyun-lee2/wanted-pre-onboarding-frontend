@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Main from "./components/Main";
-import Todo from "./components/Todo";
-import NotFound from "./components/NotFound";
+import Main from "./routes/Main";
+import Todo from "./routes/Todo";
+import NotFound from "./routes/NotFound";
 
 function App() {
    return (
