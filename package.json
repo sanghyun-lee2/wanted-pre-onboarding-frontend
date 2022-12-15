@@ -49,6 +49,5 @@
   },
   "devDependencies": {
     "gh-pages": "^4.0.0"
-  },
-  "homepage": "https://sanghyun-lee2.github.io/wanted-pre-onboarding-frontend/"
+  }
 }
